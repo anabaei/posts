@@ -1,6 +1,6 @@
  import connection from '../db/connection.js';
  import Sequelize from 'sequelize';
-// import Post from "./Post.js";
+ import Post from "./Post.js";
 
 const User = connection.define('User',{
     name: Sequelize.STRING,
@@ -8,6 +8,6 @@ const User = connection.define('User',{
   });
   // then you only need to import sequelize and sync it 
 
- //User.hasMany(Post);
+ User.hasMany(Post, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
 
  export default User;
