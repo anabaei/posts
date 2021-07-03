@@ -1,0 +1,26 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.112.0/containers/docker-existing-dockerfile
+{
+	"name": " Container",
+	"dockerFile": "./Dockerfile.develop",
+	"settings": {
+		"terminal.integrated.shell.linux": null
+	},
+	"forwardPorts": [3000],
+	"extensions": [
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode"
+	],
+	"build": {
+		"args": {
+			"NPM_TOKEN": "${localEnv:NPM_TOKEN}",
+			"SERVICE_PORT": "3000" 
+		}
+	},
+	"postCreateCommand": "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" > .npmrc && npm i",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+	"workspaceFolder": "/workspace",
+	"mounts": [
+			"source=node_modules,target=/workspace/node_modules,type=volume"
+	]
+}
