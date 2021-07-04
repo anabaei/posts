@@ -18,6 +18,27 @@ router.get("/", async (req, res)=>{
     res.json(results);
 })
 
+router.get("/posts", async (req, res)=>{
+    const UserId = 1;
+    const results = await connection.models.User.findAll({
+        include:[
+         {
+            model: connection.models.Post,
+            where: {
+             UserId,
+            },
+            required: true,
+         }
+        ],
+        order: [
+            ['createdAt', 'DESC']
+        ],
+        limit: 10,
+        offset: 20
+    })
+    res.json(results);
+})
+
 router.post("/", async (req, res, next)=>{
     const {name, bio} = req.body;
     try {
