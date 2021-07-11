@@ -1,7 +1,7 @@
 import Express from 'express';
-import bodyParser from 'body-parser';
-import users from './routes/users.js'; 
-import posts from './routes/posts.js';
+// import bodyParser from 'body-parser';
+// import users from './routes/users.js'; 
+// import posts from './routes/posts.js';
 
 ///////////////////////////////////////////////////
 ////////// Allow to parse bodies in json //////////
