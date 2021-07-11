@@ -15,13 +15,17 @@ let connection = null;
 // } 
 console.log(process.env.DATABASE_URL);
  if(process.env.DATABASE_URL){
-	connection = new Sequelize(process.env.DATABASE_URL, {
+	connection =  new Sequelize(`${process.env.DATABASE_URI}?sslmode=require`, {
+		url: process.env.DATABASE_URI,
 		dialect: 'postgres',
-		protocol: 'postgres',
+		logging: false,
 		dialectOptions: {
-			ssl: true
+		  ssl: {
+			require: true,
+			rejectUnauthorized: false, // very important
+		  }
 		}
-	});
+	  });
 }
 else {
 	// the application is executed on the local machine
