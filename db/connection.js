@@ -13,7 +13,7 @@ let connection = null;
 // 		logging: true //false
 // 	});
 // } 
-console.log(">>><<<>>",process.env.DATABASE_URI);
+console.log(">>><<<>>",process.env);
  if(process.env.DATABASE_URL){
 	connection =  new Sequelize(`${process.env.DATABASE_URI}?sslmode=require`, null, null, {
 		url: process.env.DATABASE_URI,
