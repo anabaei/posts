@@ -14,7 +14,6 @@ app.use('/users', users);
 app.use('/posts', posts);
 
 app.get('/', (request, response) => { 
-    console.log(' >>>> ',process.env);
     response.json(`Hello, World!`) 
 })           
 const port = process.env.PORT || 3000;
