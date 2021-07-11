@@ -7,7 +7,7 @@ import posts from './routes/posts.js';
 ////////// Allow to parse bodies in json //////////
 ///////////////////////////////////////////////////
 const app = Express()
-console.log(">>><<<>>!!!  ",process.env);
+
 app.use(bodyParser.json()); // help us to handle json in body
 app.use(bodyParser.urlencoded({ extended: false})); // help us to have req.body in callbacks and reads what is inside body
 
@@ -16,6 +16,7 @@ app.use('/posts', posts);
 
 
 app.get('/', (request, response) => { 
+    console.log(">>><<<>>!!!  ",process.env);
     response.json(`Hello, World!`) 
 })           
 const port = process.env.PORT || 3000;
