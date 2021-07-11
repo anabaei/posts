@@ -13,8 +13,8 @@ if (process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
 		logging: true //false
 	});
 } 
-else if(process.env.DATABASE_URL){
-	new Sequelize(process.env.DATABASE_URL, {
+ if(process.env.DATABASE_URL){
+	connection = new Sequelize(process.env.DATABASE_URL, {
 		dialect: 'postgres',
 		protocol: 'postgres',
 		dialectOptions: {
