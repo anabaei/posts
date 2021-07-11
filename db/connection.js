@@ -30,9 +30,7 @@ else {
 	// the application is executed on the local machine
 	connection= new Sequelize('postgres://localhost:5432/aaa', { dialect: 'postgres' });
 }
-connection.authenticate().then(() => {
-	console.log('Connection to db established successfully');
-});
+connection.sync().then( ()=> "tables created successfully")
 
 export default connection;
 
