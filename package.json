@@ -1,6 +1,9 @@
 {
   "name": "posts",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.x"
+  },
   "description": "This is skill test for Imagequix",
   "main": "index.js",
   "type": "module",
