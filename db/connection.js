@@ -13,9 +13,9 @@ let connection = null;
 // 		logging: true //false
 // 	});
 // } 
-console.log(process.env.DATABASE_URL);
+console.log(" >>>> ",process.env.DATABASE_URL);
  if(process.env.DATABASE_URL){
-	connection =  new Sequelize(`${process.env.DATABASE_URI}?sslmode=require`, {
+	connection =  new Sequelize(`${process.env.DATABASE_URI}?sslmode=require`, null, null, {
 		url: process.env.DATABASE_URI,
 		dialect: 'postgres',
 		logging: false,
