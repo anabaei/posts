@@ -28,15 +28,13 @@ router.post("/", async (req, res, next)=>{
     }
 })
 
-router.get("/:postId", async (req, res)=>{
-    const PostId = req.params.postId;
-    const UserId = 1;
+router.get("/:userId", async (req, res)=>{
+    const UserId = req.params.userId;
     const results = await connection.models.Post.findAll({
           where: { UserId },
           include: [
               {
-                  model: connection.models.Comment,
-                  where: { PostId }
+                  model: connection.models.Comment
               }
           ]
     })
@@ -60,9 +58,8 @@ router.get("/:postId", async (req, res)=>{
     res.json(results);
 })
 
-router.post("/:postId/comments", async (req, res, next)=>{
-    // const postId  = req.query.postId;
-    const PostId = 1;
+router.post("/:PostId/comments", async (req, res, next)=>{
+    const { PostId } =  req.params;
     const {title, content } = req.body;
     try {
         const results = await connection.models.Comment.create({
@@ -76,6 +73,25 @@ router.post("/:postId/comments", async (req, res, next)=>{
     }
 })
 
+router.get("/:PostId/comments", async (req, res, next)=>{
+    const { PostId }  = req.params;
+
+    try {
+        const results = await connection.models.Post.findAll({
+            where: { id: PostId },
+            include: [
+                {
+                    model: connection.models.Comment
+                }
+            ]
+        });
+        return res.json(results);
+    } catch (error) {
+        return next(error);
+    }
+})
+
+// Comment on Comment
 router.post("/:postId/comments/:commentId", async (req, res, next)=>{
     const PostId  = req.params.postId;
     const CommentId  = req.params.commentId;
