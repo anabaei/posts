@@ -15,7 +15,7 @@ let connection = null;
 // } 
  if(process.env.DATABASE_URL){
 	connection =  new Sequelize(process.env.DATABASE_URL, {
-		dialect: 'postgres',
+		dialect: 'postgres1',
 		logging: false,
 		dialectOptions: {
 		  ssl: {
@@ -27,9 +27,16 @@ let connection = null;
 }
 else {
 	// the application is executed on the local machine
-	connection= new Sequelize('postgres://localhost:5432/aaa', { dialect: 'postgres' });
+	// connection= new Sequelize('postgres://localhost:5432/postgresDB', { dialect: 'postgres' });
+	connection= new Sequelize(`postgres://postgres:pw@localhost:5432/postgres1`, {
+		 dialect: 'postgres', 
+		 logging: false 
+		})
 }
-connection.sync().then( ()=> "tables created successfully")
+
+connection.sync();
+
+// connection.sync().then( ()=> "tables created successfully")
 
 export default connection;
 
