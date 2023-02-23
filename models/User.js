@@ -8,6 +8,6 @@ const User = connection.define('User',{
   });
   // then you only need to import sequelize and sync it 
 
- User.hasMany(Post, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
+User.hasMany(Post, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
 
- export default User;
+export default User;

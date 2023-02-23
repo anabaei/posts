@@ -11,8 +11,8 @@ const Comment = connection.define('Comment',{
    country: Sequelize.STRING,
  });
 
- Comment.hasMany(Comment, { foreignKey: { allowNull: true }, onDelete: 'CASCADE' });
- // then you only need to import sequelize and sync it 
-// sequelize.sync();
+// //  Comment.hasMany(Comment, { foreignKey: { allowNull: true }, onDelete: 'CASCADE' });
+//  // then you only need to import sequelize and sync it 
+// // sequelize.sync();
 
 export default Comment;

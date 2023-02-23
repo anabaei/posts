@@ -3,17 +3,16 @@ import express from 'express';
 // need to pass models here to make it create connection, but in 
 // the below code we don't use it, instead we use model object in connection object
 import User from '../models/User.js';
-import Post from '../models/Post.js';
+// import Post from '../models/Post.js';
 
 import connection from '../db/connection.js';
 const router = express.Router();
 // import Post from '../models/Post.js';
 
 // Critical, create tables if not exist on the current connection with current models
-connection.sync();
 
 
-router.get("/", async (req, res)=>{
+router.get("/users", async (req, res)=>{
     const results = await connection.models.User.findAll()
     res.json(results);
 })
