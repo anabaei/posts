@@ -1,0 +1,13 @@
+2023-01-23 15:29:44.346 PST [9995] LOG:  starting PostgreSQL 14.6 (Homebrew) on aarch64-apple-darwin22.1.0, compiled by Apple clang version 14.0.0 (clang-1400.0.29.202), 64-bit
+2023-01-23 15:29:44.346 PST [9995] LOG:  listening on IPv6 address "::1", port 5432
+2023-01-23 15:29:44.346 PST [9995] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-01-23 15:29:44.347 PST [9995] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2023-01-23 15:29:44.348 PST [9996] LOG:  database system was shut down at 2023-01-23 15:29:27 PST
+2023-01-23 15:29:44.350 PST [9995] LOG:  database system is ready to accept connections
+2023-01-23 15:31:48.388 PST [11115] FATAL:  database "aaa" does not exist
+2023-01-23 15:34:44.349 PST [9997] PANIC:  could not open file "/usr/local/var/postgres/global/pg_control": No such file or directory
+2023-01-23 15:34:44.350 PST [9995] LOG:  checkpointer process (PID 9997) was terminated by signal 6: Abort trap: 6
+2023-01-23 15:34:44.350 PST [9995] LOG:  terminating any other active server processes
+2023-01-23 15:34:44.352 PST [9995] LOG:  all server processes terminated; reinitializing
+2023-01-23 15:34:44.357 PST [9995] FATAL:  could not stat data directory "/usr/local/var/postgres": No such file or directory
+2023-01-23 15:34:44.359 PST [9995] LOG:  database system is shut down
