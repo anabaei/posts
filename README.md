@@ -61,3 +61,41 @@ select * from "Users";   -> show table
 ```
 * To get max number of people in each country, use group by country, select Max(anyAttribute) and order by ... DESC
 * docker tag app_image infroger/app_image:1
+
+
+#### APIs
+
+#### users
+* http://localhost:3001/users
+```bash
+POST
+{
+	"name": "Amir khan",
+  "email": "amir@gmail.com"
+  "bio": ""
+}
+GET
+PUT, to replace the whole resource. several puts is same as one single put
+PATH, partialy update resource. several path are different
+```
+
+#### posts
+* http://localhost:3001/posts
+```bash
+POST
+{
+	"name": "Amir khan",
+  "email": "amir@gmail.com"
+  "bio": ""
+}
+GET
+PUT, to replace the whole resource. several puts is same as one single put
+PATH, partialy update resource. several path are different
+```
+
+### Config
+* install dotenv and run  
+```javascript
+config()
+```
+* Then inside  `process.env` you access the `.env` variables 
