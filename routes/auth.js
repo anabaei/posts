@@ -16,8 +16,10 @@ router.post("/", async (req, res, next)=>{
 
     // Check if username and password are valid (you should replace this with your own authentication logic)
   if (username === 'myusername' && password === 'mypassword') {
+    // get userId 
+    const userId=1;
     // Generate JWT
-    const token = jwt.sign({ username },  process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ username, userId },  process.env.JWT_SECRET, { expiresIn: '10h' });
     res.json({ token });
   } else {
     res.status(401).json({ error: 'Invalid username or password' });
