@@ -19,20 +19,20 @@ router.get("/:postId", async (req, res)=>{
     res.json(results);
 })
 
-// router.post("/:postId", async (req, res, next)=>{
-//     const postId  = req.query.postId;
-//     const {title, content, commentId} = req.body;
-//     try {
-//         const results = await connection.models.Comment.create({
-//             postId,
-//             title,
-//             content,
-//         });
-//         return res.json(results);
-//     } catch (error) {
-//         return next(error);
-//     }
-// })
+router.post("/:postId", async (req, res, next)=>{
+    const postId  = req.query.postId;
+    const {title, content, commentId} = req.body;
+    try {
+        const results = await connection.models.Comment.create({
+            postId,
+            title,
+            content,
+        });
+        return res.json(results);
+    } catch (error) {
+        return next(error);
+    }
+})
 
 export default router;
 
