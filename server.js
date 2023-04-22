@@ -2,6 +2,7 @@ import Express from 'express';
 import bodyParser from 'body-parser';
 import users from './routes/users.js'; 
 import posts from './routes/posts.js';
+import comments from './routes/comments.js';
 import authMiddleware from './middleware/authMiddleware.js'
 import auth from './routes/auth.js';
 import { config } from 'dotenv';

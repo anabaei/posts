@@ -14,11 +14,11 @@ const router = express.Router();
 //connection.sync();
 
 router.post("/", async (req, res, next)=>{
-    const UserId  = req.headers.userid;
+    const userId  = req.userId;
     const {title, content} = req.body;
     try {
         const results = await connection.models.Post.create({
-            UserId,
+            userId,
             title,
             content,
         });
@@ -90,8 +90,9 @@ router.get("/:PostId/comments", async (req, res, next)=>{
         return next(error);
     }
 })
-
-// Comment on Comment
+////////////////////////////////////////////////////////////
+//////////////////// Comment on Comment ////////////////////
+//////////////////////////////////////////////////////////////
 router.post("/:postId/comments/:commentId", async (req, res, next)=>{
     const PostId  = req.params.postId;
     const CommentId  = req.params.commentId;

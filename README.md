@@ -92,6 +92,25 @@ GET
 PUT, to replace the whole resource. several puts is same as one single put
 PATH, partialy update resource. several path are different
 ```
+#### comments
+* posts/:PostId/comments
+```bash
+POST
+{
+	"title": "aa",
+  "content": "amir@gmail.com"
+  "postid": ""
+  "like": ""
+  "dislike": ""
+  "ipaddress": ""
+  "city": ""
+  country: ""
+}
+GET /posts/:PostId/comments
+# Comments on Comments
+post /posts/:postId/comments/:commentid
+
+```
 
 ### Config
 * install dotenv and run  

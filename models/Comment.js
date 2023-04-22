@@ -6,7 +6,7 @@ const Comment = connection.define('Comment',{
    content: Sequelize.TEXT,
    like: Sequelize.INTEGER,
    dislike: Sequelize.INTEGER,
-   ipAddress: Sequelize.STRING,
+   ipaddress: Sequelize.STRING,
    city: Sequelize.STRING,
    country: Sequelize.STRING,
  });
