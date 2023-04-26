@@ -4,6 +4,7 @@
 
 const User = connection.define('User',{
     name: Sequelize.STRING,
+    email: Sequelize.STRING,
     bio: Sequelize.TEXT
   });
   // then you only need to import sequelize and sync it 
