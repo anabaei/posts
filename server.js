@@ -1,32 +1,33 @@
-import Express from 'express';
+import express from 'express';
 import bodyParser from 'body-parser';
-import users from './routes/users.js'; 
-import posts from './routes/posts.js';
-import authMiddleware from './middleware/authMiddleware.js'
-import auth from './routes/auth.js';
-import { config } from 'dotenv';
 import cors from 'cors';
+import { config } from 'dotenv';
 
-///////////////////////////////////////////////////
-////////// Allow to parse bodies in json //////////
-///////////////////////////////////////////////////
-const app = Express()
-config()
+import usersRouter from './routes/users.js';
+import postsRouter from './routes/posts.js';
+import travelsRouter from './routes/travels.js';
+import packagesRouter from './routes/packages.js';
+import authRouter from './routes/auth.js';
+import authMiddleware from './middleware/authMiddleware.js';
+
+const app = express();
+config();
 
 app.use(cors());
-app.use(bodyParser.json()); // help us to handle json in body
-app.use(bodyParser.urlencoded({ extended: false})); // help us to have req.body in callbacks and reads what is inside body
+app.use(bodyParser.json()); // parse incoming JSON data
+app.use(bodyParser.urlencoded({ extended: false })); // parse incoming form data
 
-app.get('/', (request, response) => { 
-    // console.log(">>><<<>>!!!  ",process.env);
-    response.json(`Hello, World!`) 
-})           
-app.use('/users', users);
-app.use('/login', auth);
-app.use(authMiddleware);
-app.use('/posts', posts);
+// define routes
+app.get('/', (req, res) => {
+  res.json('Hello, World!');
+});
+
+app.use('/users', usersRouter);
+app.use('/login', authRouter);
+app.use(authMiddleware); // require authentication for all subsequent routes
+app.use('/packages', packagesRouter);
+app.use('/travels', travelsRouter);
+app.use('/posts', postsRouter);
 
 const port = process.env.PORT || 3001;
-app.listen(
-port, ()=>console.log('server is running')
-)
+app.listen(port, () => console.log(`Server is running on port ${port}`));
