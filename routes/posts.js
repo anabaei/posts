@@ -13,6 +13,8 @@ const router = express.Router();
 // Critical, create tables if not exist on the current connection with current models
 //connection.sync();
 
+
+
 router.post("/", async (req, res, next)=>{
     const userId  = req.userId;
     const {title, content} = req.body;
