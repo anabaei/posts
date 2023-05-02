@@ -19,7 +19,6 @@ catch(err){
 }   
 })
 
-
 router.post("/", async (req, res, next)=>{
     const UserId  = req.userId;
     const {location, destination, weight, explanation, timeRange} = req.body;
