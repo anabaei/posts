@@ -28,10 +28,14 @@ let connection = null;
 else {
 	// the application is executed on the local machine
 	// connection= new Sequelize('postgres://localhost:5432/postgresDB', { dialect: 'postgres' });
-	connection= new Sequelize(`postgres://postgres:pw@localhost:5432/postgres2`, {
-		 dialect: 'postgres2', 
-		 logging: false 
-		})
+	// connection= new Sequelize(`postgres://postgres:pw@localhost:5432/postgres2`, {
+	// 	 dialect: 'postgres2', 
+	// 	 logging: false 
+	// 	})
+	connection= new Sequelize(`postgres://amir@localhost:5432/postgres2`, {
+		dialect: 'postgres2', 
+		logging: false 
+	   })
 }
 
 connection.sync();
