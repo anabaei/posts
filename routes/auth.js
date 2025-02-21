@@ -12,14 +12,20 @@ const router = express.Router();
 
 
 router.post("/", async (req, res, next)=>{
-    const { username, password } = req.body;
+    const { username, password } = req.headers;
+    const { email } = req.body;
 
     // Check if username and password are valid (you should replace this with your own authentication logic)
   if (username === 'myusername' && password === 'mypassword') {
     // get userId 
-    const userId=1;
+    const userId = 1;
+    const user = {
+      userId,
+      username,
+      email
+    }
     // Generate JWT
-    const token = jwt.sign({ username, userId },  process.env.JWT_SECRET, { expiresIn: '10h' });
+    const token = jwt.sign({ user },  process.env.JWT_SECRET, { expiresIn: '100h' });
     res.json({ token });
   } else {
     res.status(401).json({ error: 'Invalid username or password' });
