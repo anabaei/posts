@@ -118,3 +118,21 @@ post /posts/:postId/comments/:commentid
 config()
 ```
 * Then inside  `process.env` you access the `.env` variables 
+
+## Docker in Container 
+* To run docker inside container for mac m1
+```bash
+ curl -sSL https://get.docker.com/ | sudo sh
+# to check if exist and run
+$ sudo apt-get update && sudo apt-get upgrade
+```
+
+### DB
+
+```javascript
+psql -U amir -d postgres
+psql postgres://amir@localhost:5432/postgres2
+CREATE ROLE postgres WITH LOGIN PASSWORD 'password';
+GRANT USAGE, SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO postgres;
+
+```

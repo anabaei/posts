@@ -13,8 +13,10 @@ export default function authMiddleware(req, res, next) {
 
   try {
     // Verify and decode the JWT
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.userId = decoded.userId;
+    //const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token);
+    // check if the userId existed in  table, if not
+    req.userId = decoded.user.email;
     next();
   } catch (err) {
     return res.status(401).json({ message: 'Invalid or expired token' });

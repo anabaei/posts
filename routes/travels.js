@@ -18,6 +18,15 @@ catch(err){
     return next(err);
 }   
 })
+router.get("/:id", async (req, res, next)=>{
+    try {
+    const results = await connection.models.Travel.findAll()
+    res.json(results);
+}
+catch(err){
+    return next(err);
+}   
+})
 
 
 
