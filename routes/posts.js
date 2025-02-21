@@ -20,7 +20,7 @@ router.post("/", async (req, res, next)=>{
     const {title, content} = req.body;
     try {
         const results = await connection.models.Post.create({
-            userId,
+            UserId: userId,
             title,
             content,
         });
