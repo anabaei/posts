@@ -1,22 +1,30 @@
-// models/User.js
+// models/Organization.js
 import connection from '../db/connection.js';  // Your Sequelize connection
 import Sequelize from 'sequelize';
-import Post from './Post.js';  // Assuming the Post model is defined
 
-// Define the User model
-const User = connection.define('User', {
-    user_id: {
+// Define the Organization model
+const Organization = connection.define('Organization', {
+    org_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
-    type: {
-        type: Sequelize.ENUM('admin', 'client'),
-        allowNull: false,
-    },
-    name: {
+    company_name: {
         type: Sequelize.STRING,
         allowNull: false,
+    },
+    company_code: {
+        type: Sequelize.STRING,
+        unique: true,
+        allowNull: true,
+    },
+    main_contact: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
+    website: {
+        type: Sequelize.STRING,
+        allowNull: true,
     },
     email: {
         type: Sequelize.STRING,
@@ -24,15 +32,19 @@ const User = connection.define('User', {
         allowNull: false,
         validate: {
             isEmail: true,  // Ensures it's a valid email format
-        },
+        }
     },
     phone: {
         type: Sequelize.STRING,
         allowNull: true,
     },
-    clinic_id: {
-        type: Sequelize.INTEGER,
-        allowNull: true,  // Clinic ID should be null for clients
+    image: {
+        type: Sequelize.BLOB,  // Store image as binary
+        allowNull: true,
+    },
+    location: {
+        type: Sequelize.TEXT,
+        allowNull: true,
     },
     created_at: {
         type: Sequelize.DATE,
@@ -43,19 +55,11 @@ const User = connection.define('User', {
         defaultValue: Sequelize.NOW,
     }
 }, {
-    tableName: 'users',
+    tableName: 'organizations',  // Ensure the table name matches
     timestamps: false,  // Disable auto timestamps if you manage them manually
-});
-
-// Define a relationship to the Post model
-User.hasMany(Post, { 
-    foreignKey: { 
-        allowNull: false 
-    }, 
-    onDelete: 'CASCADE' 
 });
 
 // Sync the model with the database
 // sequelize.sync();  // Uncomment this line to sync
 
-export default User;
+export default Organization;
