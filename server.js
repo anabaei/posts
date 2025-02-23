@@ -5,9 +5,8 @@ import { config } from 'dotenv';
 
 import usersRouter from './routes/users.js';
 import postsRouter from './routes/posts.js';
-import travelsRouter from './routes/travels.js';
-import packagesRouter from './routes/packages.js';
 import authRouter from './routes/auth.js';
+import organizationRouter from './routes/organizations.js';
 import authMiddleware from './middleware/authMiddleware.js';
 
 const app = express();
@@ -25,9 +24,9 @@ app.get('/', (req, res) => {
 app.use('/users', usersRouter);
 app.use('/login', authRouter);
 app.use(authMiddleware); // require authentication for all subsequent routes
-app.use('/packages', packagesRouter);
-app.use('/travels', travelsRouter);
 app.use('/posts', postsRouter);
+app.use('/organizations', organizationRouter);
+
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Server is running on port ${port}`));
