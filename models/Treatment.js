@@ -1,8 +1,6 @@
 // models/Treatment.js
 import connection from '../db/connection.js';  // Your Sequelize connection
 import Sequelize from 'sequelize';
-import Clinic from './Clinic.js';  // Assuming Clinic model is defined
-import Specialist from './Specialist.js';  // Assuming Specialist model is defined
 
 // Define the Treatment model
 const Treatment = connection.define('Treatment', {
@@ -19,27 +17,23 @@ const Treatment = connection.define('Treatment', {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-            model: 'clinics',  // Reference the 'clinics' table
-            key: 'clinic_id',  // The clinic's primary key
+            model: 'clinics',  // The referenced table name
+            key: 'clinic_id',  // The referenced column
         },
-        onDelete: 'CASCADE', // If the associated clinic is deleted, remove treatments
+        onDelete: 'CASCADE',  // If a clinic is deleted, delete the associated treatments
     },
     specialist_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        // No foreign key, but we would validate specialist ID manually if needed
+        // No FK constraint here as per your request
     },
     duration: {
-        type: Sequelize.INTEGER,  // Duration in minutes
-        allowNull: false,
+        type: Sequelize.INTEGER,
+        allowNull: false,  // Duration in minutes
     },
     price: {
-        type: Sequelize.DECIMAL(10, 2),
+        type: Sequelize.FLOAT,
         allowNull: false,
-    },
-    durations: {
-        type: Sequelize.STRING,  // Description of the treatment duration (e.g., "30 minutes")
-        allowNull: true,
     },
     created_at: {
         type: Sequelize.DATE,
@@ -48,21 +42,10 @@ const Treatment = connection.define('Treatment', {
     updated_at: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
-    }
+    },
 }, {
-    tableName: 'treatments',  // Ensure the table name matches
-    timestamps: false,        // Disable auto timestamps if you manage them manually
+    tableName: 'treatments',
+    timestamps: false,     // Disable auto timestamps if you manage them manually
 });
-
-// Define relationships (though no direct foreign keys for specialist_id)
-// We use clinic_id to set up the relationship to the Clinic model
-Treatment.belongsTo(Clinic, {
-    foreignKey: 'clinic_id',  // FK in Treatment table
-    targetKey: 'clinic_id',   // PK in Clinic table
-    onDelete: 'CASCADE',      // Action when clinic is deleted
-});
-
-// Sync the model with the database
-// sequelize.sync();  // Uncomment this line to sync
 
 export default Treatment;

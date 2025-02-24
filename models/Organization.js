@@ -4,10 +4,14 @@ import Sequelize from 'sequelize';
 
 // Define the Organization model
 const Organization = connection.define('Organization', {
-    org_id: {
+    user_id: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
+        allowNull: false,  // user_id is required to link to the user (admin/creator)
+        references: {
+            model: 'users',  // Reference the 'users' table
+            key: 'user_id',  // Reference the 'user_id' field in the 'users' table
+        },
+        onDelete: null,
     },
     company_name: {
         type: Sequelize.STRING,

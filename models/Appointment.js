@@ -1,8 +1,8 @@
 // models/Appointment.js
 import connection from '../db/connection.js';  // Your Sequelize connection
 import Sequelize from 'sequelize';
-import User from './User.js';  // Assuming the User model is defined
-import Specialist from './Specialist.js';  // Assuming the Specialist model is defined
+import User from './User.js';  // Assuming User model exists
+import Specialist from './Specialist.js';  // Assuming Specialist model exists
 
 // Define the Appointment model
 const Appointment = connection.define('Appointment', {
@@ -13,65 +13,52 @@ const Appointment = connection.define('Appointment', {
     },
     user_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: false, // Link to the user
         references: {
-            model: 'users',  // Reference the 'users' table
-            key: 'user_id',  // The user's primary key
+            model: 'users',
+            key: 'user_id',
         },
-        onDelete: 'CASCADE',  // If the associated user is deleted, delete the appointment as well
+        onDelete: 'CASCADE',
     },
     specialist_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: false, // Link to the specialist
         references: {
-            model: 'specialists',  // Reference the 'specialists' table
-            key: 'specialist_id',  // The specialist's primary key
+            model: 'specialists',
+            key: 'specialist_id',
         },
-        onDelete: 'CASCADE',  // If the associated specialist is deleted, delete the appointment as well
+        onDelete: 'CASCADE',
     },
     status: {
         type: Sequelize.STRING,
         allowNull: false,
-        validate: {
-            isIn: [['pending', 'confirmed', 'completed']],  // Define the allowed statuses
-        },
+        defaultValue: 'pending', // Example status (pending, confirmed, canceled)
     },
     appointment_date: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
     },
     note: {
         type: Sequelize.TEXT,
         allowNull: true,
     },
-    created_at: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW,
-    },
-    updated_at: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW,
-    }
 }, {
     tableName: 'appointments',  // Ensure the table name matches
-    timestamps: false,          // Disable auto timestamps if you manage them manually
+    timestamps: true,           // Enable auto timestamps
 });
 
-// Define the relationship to the User model (one user can have many appointments)
+// Define the relationships
 Appointment.belongsTo(User, {
     foreignKey: 'user_id',
     targetKey: 'user_id',
-    onDelete: 'CASCADE',
 });
 
-// Define the relationship to the Specialist model (one specialist can have many appointments)
 Appointment.belongsTo(Specialist, {
     foreignKey: 'specialist_id',
     targetKey: 'specialist_id',
-    onDelete: 'CASCADE',
 });
 
 // Sync the model with the database
-// sequelize.sync();  // Uncomment this line to sync
+// sequelize.sync();  // Uncomment this line to sync the model with DB
 
 export default Appointment;

@@ -1,7 +1,6 @@
-// models/Specialist.js
 import connection from '../db/connection.js';  // Your Sequelize connection
 import Sequelize from 'sequelize';
-import Clinic from './Clinic.js';  // Assuming the Clinic model is already defined
+import Clinic from './Clinic.js';  // Assuming Clinic model exists
 
 // Define the Specialist model
 const Specialist = connection.define('Specialist', {
@@ -27,17 +26,17 @@ const Specialist = connection.define('Specialist', {
         }
     },
     image: {
-        type: Sequelize.STRING,  // URL to the specialist's image
+        type: Sequelize.STRING,  // Assuming URL for image
         allowNull: true,
     },
-    clinics_id: {
+    clinic_id: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: false,
         references: {
-            model: 'clinics',  // Reference the 'clinics' table
-            key: 'clinic_id',  // The clinic's primary key
+            model: 'clinics',  // The referenced table name
+            key: 'clinic_id',  // The referenced column
         },
-        onDelete: 'SET NULL',  // If the associated clinic is deleted, set this FK to NULL
+        onDelete: 'CASCADE', // If the associated clinic is deleted, delete the specialist
     },
     created_at: {
         type: Sequelize.DATE,
@@ -52,11 +51,11 @@ const Specialist = connection.define('Specialist', {
     timestamps: false,         // Disable auto timestamps if you manage them manually
 });
 
-// Define the relationship between Specialist and Clinic (Foreign Key)
+// Define the relationship between Specialist and Clinic (foreign key)
 Specialist.belongsTo(Clinic, {
-    foreignKey: 'clinics_id',   // FK in Specialist table
-    targetKey: 'clinic_id',     // PK in Clinic table
-    onDelete: 'SET NULL',        // Action when the associated clinic is deleted
+    foreignKey: 'clinic_id',   // FK in Specialist table
+    targetKey: 'clinic_id',    // PK in Clinic table
+    onDelete: 'CASCADE',       // Action when the clinic is deleted
 });
 
 // Sync the model with the database
