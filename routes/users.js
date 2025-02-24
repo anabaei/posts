@@ -115,12 +115,13 @@ router.post("/signin", async (req, res, next) => {
 
 
 router.post("/", async (req, res, next) => {
-    const { name, email, image } = req.body;
+    const { name, email, image, type } = req.body;
     try {
         const results = await connection.models.User.create({
             name,
             email,
-            image
+            image,
+            type
         });
         return res.json(results);
     } catch (error) {

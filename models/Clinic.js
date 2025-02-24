@@ -15,19 +15,15 @@ const Clinic = connection.define('Clinic', {
         allowNull: false,
     },
     org_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true,
         references: {
             model: 'organizations',  // The referenced table name
-            key: 'org_id',           // The referenced column
+            key: 'company_code',           // The referenced column
         },
         onDelete: 'SET NULL', // If the associated organization is deleted, set org_id to NULL
     },
-    clinic_code: {
-        type: Sequelize.STRING,
-        unique: true,
-        allowNull: true,
-    },
+   
     main_contact: {
         type: Sequelize.STRING,
         allowNull: true,
@@ -69,12 +65,6 @@ const Clinic = connection.define('Clinic', {
     timestamps: false,     // Disable auto timestamps if you manage them manually
 });
 
-// Define the relationship between Clinic and Organization (foreign key)
-Clinic.belongsTo(Organization, {
-    foreignKey: 'org_id',   // FK in Clinic table
-    targetKey: 'org_id',    // PK in Organization table
-    onDelete: 'SET NULL',    // Action when organization is deleted
-});
 
 // Sync the model with the database
 // sequelize.sync();  // Uncomment this line to sync
