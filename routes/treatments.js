@@ -8,7 +8,7 @@ const router = express.Router();
 // Create a new Treatment
 router.post('/:clinic_id', async (req, res) => {
     const { clinic_id } = req.params;  // Clinic ID passed as part of the URL
-    const { name, specialist_id, duration, price } = req.body;
+    const { name, specialist_id, duration, price, service } = req.body;
 
     try {
         // Check if clinic exists
@@ -24,6 +24,7 @@ router.post('/:clinic_id', async (req, res) => {
             specialist_id,
             duration,
             price,
+            service
         });
 
         res.status(201).json(newTreatment);

@@ -22,6 +22,11 @@ const Treatment = connection.define('Treatment', {
         },
         onDelete: 'CASCADE',  // If a clinic is deleted, delete the associated treatments
     },
+    service: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        // No FK constraint here as per your request
+    },
     specialist_id: {
         type: Sequelize.INTEGER,
         allowNull: false,

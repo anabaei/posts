@@ -128,7 +128,7 @@ router.delete("/:id", async (req, res, next) => {
 /////////////////////////////////////
 router.post('/:org_code/clinics', async (req, res) => {
     try {
-        const org_code =req.params.org_code;
+        const {org_code} =req.params;
         const { clinic_name, clinic_code, main_contact, website, email, phone, image, location } = req.body;
 
         // Validate required fields (e.g., clinic_name and email)

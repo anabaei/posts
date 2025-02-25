@@ -39,6 +39,25 @@ specialistRouter.get('/', async (req, res) => {
 });
 
 // Route to get a specific specialist by ID
+specialistRouter.get('/clinic/:clinic_id', async (req, res) => {
+    try {
+        const { clinic_id } = req.params;
+        const specialists = await Specialist.findAll({
+            where: { clinic_id }
+        });
+        
+        if (!specialists) {
+            return res.status(404).json({ message: 'Specialist not found' });
+        }
+
+        res.status(200).json(specialists);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Failed to fetch specialists for this clinic', error });
+    }
+});
+
+// Route to get a specific specialist by ID
 specialistRouter.get('/:specialist_id', async (req, res) => {
     try {
         const { specialist_id } = req.params;

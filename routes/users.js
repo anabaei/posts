@@ -18,6 +18,20 @@ router.get("/", async (req, res) => {
     res.json(results);
 })
 
+router.get("/clinic/:clinic_id/admins", async (req, res) => {
+    const {clinic_id} = req.params;
+    const results = await connection.models.User.findAll({
+            where: {
+                clinic_id: clinic_id,
+                type: 'admin'
+            }
+        });
+    
+    
+    
+    res.json(results);
+})
+
 router.get("/posts", async (req, res) => {
     const UserId = 1;
     const results = await connection.models.User.findAll({
@@ -115,13 +129,14 @@ router.post("/signin", async (req, res, next) => {
 
 
 router.post("/", async (req, res, next) => {
-    const { name, email, image, type } = req.body;
+    const { name, email, image, type, clinic_id } = req.body;
     try {
         const results = await connection.models.User.create({
             name,
             email,
             image,
-            type
+            type,
+            clinic_id
         });
         return res.json(results);
     } catch (error) {

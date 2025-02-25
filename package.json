@@ -25,6 +25,7 @@
     "gh": "^1.13.9",
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.6.0",
+    "react-router-dom": "^6.29.0",
     "sequelize": "^6.6.4",
     "sinon": "^13.0.1",
     "supertest": "^6.3.3"
